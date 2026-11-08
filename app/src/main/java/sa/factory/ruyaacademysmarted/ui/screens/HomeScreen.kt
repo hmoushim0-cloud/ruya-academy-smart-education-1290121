@@ -26,7 +26,8 @@ fun HomeScreen(
     viewModel: RuyaAcademyViewModel,
     onItemClick: (RuyaAcademyItem) -> Unit
 ) {
-    val categories = listOf("الكل", "الخدمات الرئيسية", "المراقبة الحية", "التقارير الضريبية", "الإعدادات")
+    val categories = listOf("الكل", "دورات النحو واللغة", "الاختبارات المعيارية", "ورش العمل المباشرة", "حقائب التدريب")
+    val defaultPeripheral = "Smart Stylus Digitizer 4096-Level + BLE Beacon"
 
     Column(
         modifier = Modifier
@@ -36,8 +37,8 @@ fun HomeScreen(
     ) {
         // Header
         Column {
-            Text("تطبيق رؤية للتدريب — MST22-D-001 · كتابة 150 سؤال", fontSize = 22.sp, fontWeight = FontWeight.Black, color = BrandTextPrimary)
-            Text("منظومة smart_education المتكاملة مع ربط Smart Stylus Digitizer 4096-Level + BLE Beacon", fontSize = 12.sp, color = BrandTextSecondary)
+            Text("أكاديمية رؤية للتعليم الذكي والتدريب اللغوي", fontSize = 22.sp, fontWeight = FontWeight.Black, color = BrandTextPrimary)
+            Text("منظومة التعليم التفاعلي والتقييم اللغوي مع ربط القلم الرقمي وحساس الحضور", fontSize = 12.sp, color = BrandTextSecondary)
         }
 
         // Hardware Status Capsule
@@ -52,8 +53,9 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text("العتاد الحي: ${state.telemetry?.peripheralName ?: 'Smart Stylus Digitizer 4096-Level + BLE Beacon'}", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 13.sp)
-                    Text(state.telemetry?.liveReading ?: "Smart Stylus Digitizer 4096-Level + BLE Beacon: ONLINE | READY", fontSize = 11.sp, color = BrandTextSecondary)
+                    val peripheralLabel = state.telemetry?.peripheralName ?: defaultPeripheral
+                    Text("العتاد الحي: $peripheralLabel", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 13.sp)
+                    Text(state.telemetry?.liveReading ?: "$defaultPeripheral: ONLINE | READY", fontSize = 11.sp, color = BrandTextSecondary)
                 }
                 Badge(containerColor = BrandPrimary) {
                     Text(state.telemetry?.status ?: "ONLINE", color = Color.Black, fontWeight = FontWeight.Bold, modifier = Modifier.padding(2.dp))

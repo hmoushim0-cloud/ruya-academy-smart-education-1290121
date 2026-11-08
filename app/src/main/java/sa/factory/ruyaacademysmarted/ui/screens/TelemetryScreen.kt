@@ -15,6 +15,8 @@ import sa.factory.ruyaacademysmarted.ui.viewmodel.RuyaAcademyUiState
 
 @Composable
 fun TelemetryScreen(state: RuyaAcademyUiState) {
+    val defaultPeripheral = "Smart Stylus Digitizer 4096-Level + BLE Beacon"
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -22,7 +24,7 @@ fun TelemetryScreen(state: RuyaAcademyUiState) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text("مراقبة العتاد الحي والحساسات", fontSize = 20.sp, fontWeight = FontWeight.Black, color = BrandTextPrimary)
-        Text("بروتوكول الربط المباشر الميداني", fontSize = 12.sp, color = BrandTextSecondary)
+        Text("بروتوكول الربط المباشر الميداني لأكاديمية رؤية", fontSize = 12.sp, color = BrandTextSecondary)
 
         Card(
             shape = RoundedCornerShape(18.dp),
@@ -36,10 +38,11 @@ fun TelemetryScreen(state: RuyaAcademyUiState) {
                         Text(state.telemetry?.status ?: "ONLINE", color = Color.Black, fontWeight = FontWeight.Bold, modifier = Modifier.padding(4.dp))
                     }
                 }
-                Text("اسم العتاد: ${state.telemetry?.peripheralName ?: 'Smart Stylus Digitizer 4096-Level + BLE Beacon'}", fontWeight = FontWeight.Bold, color = BrandTextPrimary, fontSize = 14.sp)
-                Text("جودة الإشارة: ${state.telemetry?.signalDbm ?: -58} dBm  •  البطارية: ${state.telemetry?.batteryPct ?: 98}%", color = BrandSecondary, fontSize = 12.sp)
-                
-                Divider(color = BrandCard)
+                val peripheralLabel = state.telemetry?.peripheralName ?: defaultPeripheral
+                Text("اسم العتاد: $peripheralLabel", fontWeight = FontWeight.Bold, color = BrandTextPrimary, fontSize = 14.sp)
+                Text("جودة الإشارة: ${state.telemetry?.signalDbm ?: -58} dBm | البطارية: ${state.telemetry?.batteryPct ?: 98}%", color = BrandSecondary, fontSize = 12.sp)
+
+                HorizontalDivider(color = BrandCard)
                 Text("حزمة البيانات اللحظية (Raw Telemetry Payload):", color = BrandTextSecondary, fontSize = 11.sp)
                 Surface(
                     shape = RoundedCornerShape(8.dp),
@@ -47,7 +50,7 @@ fun TelemetryScreen(state: RuyaAcademyUiState) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = state.telemetry?.liveReading ?: "Smart Stylus Digitizer 4096-Level + BLE Beacon: ONLINE | READY",
+                        text = state.telemetry?.liveReading ?: "$defaultPeripheral: ONLINE | READY",
                         color = BrandPrimary,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Medium,
@@ -63,10 +66,11 @@ fun TelemetryScreen(state: RuyaAcademyUiState) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("معايير الامتثال والحوكمة", fontWeight = FontWeight.Bold, color = BrandTextPrimary, fontSize = 14.sp)
-                Text("✓ تشفير كامل للاتصال الطرفي (AES-256 GCM)", color = BrandTextSecondary, fontSize = 12.sp)
-                Text("✓ مطابقة اشتراطات هيئة الاتصالات والفضاء والتقنية", color = BrandTextSecondary, fontSize = 12.sp)
-                Text("✓ مزامنة فورية خالية من الإيموجي ومتوافقة مع المعايير السعودية", color = BrandTextSecondary, fontSize = 12.sp)
+                Text("معايير الامتثال والاعتماد الأكاديمي", fontWeight = FontWeight.Bold, color = BrandTextPrimary, fontSize = 14.sp)
+                Text("[OK] بروتوكول قلم رقمي تفاعلي 4096 مستوى ضغط مع خاصية Palm Rejection", color = BrandTextSecondary, fontSize = 12.sp)
+                Text("[OK] رصد حضور ذكي عبر منارات البلوتوث منخفض الطاقة BLE Beacon بدقة Micro-Fencing", color = BrandTextSecondary, fontSize = 12.sp)
+                Text("[OK] نظام تقييم مصطلحات النحو العربي المعتمد مع توثيق المصادر والصفحات", color = BrandTextSecondary, fontSize = 12.sp)
+                Text("[OK] بنية كود نقية خالية من الإيموجي متوافقة مع معايير المنصات التعليمية السعودية", color = BrandTextSecondary, fontSize = 12.sp)
             }
         }
     }

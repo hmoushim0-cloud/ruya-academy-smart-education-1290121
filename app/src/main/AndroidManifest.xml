@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:label="تطبيق رؤية للتدريب — MST22-D-001 · كتابة 150 سؤال"
+        android:label="أكاديمية رؤية للتعليم الذكي والتدريب اللغوي - Ruya Smart Education"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
         <activity
